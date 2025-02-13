@@ -242,3 +242,46 @@ enum class AreaCode_39(val districtCode: Int, val districtName: String) {
     SEOGWIPO(3, "서귀포시"),
     JEJU(4, "제주시")
 }
+
+// 로그인 결과
+enum class LoginResult(val number:Int, val str:String){
+    LOGIN_RESULT_SUCCESS(1, "로그인 성공"),
+    LOGIN_RESULT_ID_NOT_EXIST(2, "존재하지 않는 아이디"),
+    LOGIN_RESULT_PASSWORD_INCORRECT(3, "잘못된 비밀번호"),
+    LOGIN_RESULT_SIGN_OUT_MEMBER(4, "탈퇴한 회원"),
+}
+
+// 사용자 상태
+enum class UserState(val number:Int, val str:String){
+    // 정상
+    USER_STATE_NORMAL(1, "정상"),
+    // 탈퇴
+    USER_STATE_SIGN_OUT(2, "탈퇴")
+}
+
+enum class MainScreenName{
+    // 시작 화면
+    MAIN_SCREEN_START,
+    // 로그인 화면
+    MAIN_SCREEN_USER_LOGIN,
+    // 회원 가입 1 화면, 회원 정보 입력 받기
+    MAIN_SCREEN_USER_JOIN_STEP1,
+    // 회원 가입 2 화면, 프로필 이미지 입력 받기
+    MAIN_SCREEN_USER_JOIN_STEP2,
+    // 회원 가입 3 화면, 카톡 가입 후 닉네임 받는 화면
+    MAIN_SCREEN_USER_JOIN_STEP3,
+    // 홈 화면
+    MAIN_SCREEN_HOME,
+    // 검색 화면
+    MAIN_SCREEN_SEARCH,
+    //검색 결과 화면
+    MAIN_SCREEN_SEARCH_RESULT,
+    // 일정 화면
+    MAIN_SCREEN_SCHEDULE,
+    // 여행기 화면
+    MAIN_SCREEN_TRIP_NOTE,
+    // 내정보
+    MAIN_SCREEN_MY_INFO,
+
+
+}
