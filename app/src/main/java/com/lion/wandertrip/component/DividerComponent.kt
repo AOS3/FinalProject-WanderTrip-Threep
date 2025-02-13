@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun DividerComponent(
-    paddingTop:Dp = 0.dp,
+    paddingTop:Dp = 10.dp,
     color:Color = Color.LightGray)
 {
     HorizontalDivider(
