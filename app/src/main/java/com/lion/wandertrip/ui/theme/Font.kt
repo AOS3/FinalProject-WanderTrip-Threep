@@ -11,7 +11,7 @@ val NanumSquareRound = FontFamily(
 )
 
 val NanumSquareRoundRegular = FontFamily(
-    Font(R.font.nanum_square_roun_regular, FontWeight.Light)
+    Font(R.font.nanum_square_roun_regular, FontWeight.Thin)
 )
 
 val NanumSquareRoundLight = FontFamily(

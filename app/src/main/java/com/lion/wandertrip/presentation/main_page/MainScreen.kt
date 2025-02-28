@@ -13,6 +13,6 @@ import com.lion.wandertrip.presentation.bottom_menu_page.BottomMenuScreen
 //) : ViewModel()
 
 @Composable
-fun MainScreen(navController: NavController) {
-    BottomMenuScreen(navController = navController)
+fun MainScreen() {
+    BottomMenuScreen()
 }

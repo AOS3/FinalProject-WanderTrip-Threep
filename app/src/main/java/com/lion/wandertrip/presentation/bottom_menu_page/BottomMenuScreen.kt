@@ -1,5 +1,9 @@
 package com.lion.wandertrip.presentation.bottom_menu_page
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.lion.wandertrip.R
 
@@ -32,8 +38,9 @@ import com.lion.wandertrip.presentation.bottom.schedule_page.ScheduleScreen
 import com.lion.wandertrip.presentation.bottom.trip_note_page.TripNoteScreen
 import com.lion.wandertrip.util.NavigationData
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun BottomMenuScreen(navController: NavController) {
+fun BottomMenuScreen(bottomMenuViewModel: BottomMenuViewModel = hiltViewModel()) {
     val navMenus = listOf(
         NavigationData("홈", R.drawable.ic_home_24px),
         NavigationData("일정", R.drawable.ic_calendar_month_24px),
@@ -41,21 +48,27 @@ fun BottomMenuScreen(navController: NavController) {
         NavigationData("My", R.drawable.ic_person_24px)
     )
 
-    var selectedItem by remember { mutableStateOf(0) }
+
+    /*var selectedItem by remember { mutableStateOf(0) }*/
 
     Scaffold(
-        bottomBar = {
-            BottomAppBar {
+            bottomBar = {
+                BottomAppBar(
+                    modifier = Modifier
+                        .border(1.dp, Color.White)  // 테두리를 흰색으로 설정
+                        .background(Color.White),   // BottomAppBar 배경색을 흰색으로 설정
+                ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround
+
                 ) {
                     navMenus.forEachIndexed { index, menu ->
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             modifier = Modifier
                                 .padding(8.dp)
-                                .clickable { selectedItem = index }
+                                .clickable { bottomMenuViewModel.tripApplication.selectedItem.value =  index }
                         ) {
                             // 🔹 drawable 리소스 아이콘 표시
                             Image(
@@ -63,7 +76,7 @@ fun BottomMenuScreen(navController: NavController) {
                                 contentDescription = menu.title,
                                 modifier = Modifier.size(24.dp),
                                 colorFilter = ColorFilter.tint(
-                                    if (selectedItem == index) Color(0xFF0077B6) // 클릭시 파란색
+                                    if (bottomMenuViewModel.tripApplication.selectedItem.value == index) Color(0xFF0077B6) // 클릭시 파란색
                                     else Color.Gray // 기본값 회색
                                 )
                             )
@@ -72,7 +85,7 @@ fun BottomMenuScreen(navController: NavController) {
 
                             Text(
                                 text = menu.title,
-                                color = if (selectedItem == index) Color.Black else Color.Gray
+                                color = if (bottomMenuViewModel.tripApplication.selectedItem.value == index) Color.Black else Color.Gray
                             )
                         }
                     }
@@ -87,7 +100,7 @@ fun BottomMenuScreen(navController: NavController) {
             modifier = Modifier.padding(paddingValues),
             contentAlignment = Alignment.Center
         ) {
-            when (selectedItem) {
+            when (bottomMenuViewModel.tripApplication.selectedItem.value) {
                 0 -> HomeScreen()
                 1 -> ScheduleScreen()
                 2 -> TripNoteScreen()

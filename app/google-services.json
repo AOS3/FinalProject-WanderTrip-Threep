@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "333120486212",
+    "firebase_url": "https://wandertrip-13b8b-default-rtdb.firebaseio.com",
     "project_id": "wandertrip-13b8b",
     "storage_bucket": "wandertrip-13b8b.firebasestorage.app"
   },

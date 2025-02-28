@@ -10,31 +10,29 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.PersonOutline
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lion.a02_boardcloneproject.component.CustomIconButton
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.lion.wandertrip.model.TripScheduleModel
+import com.lion.wandertrip.presentation.bottom.schedule_page.ScheduleViewModel
 import com.lion.wandertrip.ui.theme.NanumSquareRound
-import com.lion.wandertrip.ui.theme.NanumSquareRoundLight
 import com.lion.wandertrip.ui.theme.NanumSquareRoundRegular
 
 @Composable
 fun ScheduleItemList(
     dataList: List<TripScheduleModel>,
+    viewModel: ScheduleViewModel = hiltViewModel(),
+    scheduleType: Int,
     onRowClick: (TripScheduleModel) -> Unit = {}, // 클릭 이벤트 추가
 ) {
     LazyColumn(
@@ -75,6 +73,37 @@ fun ScheduleItemList(
                                 icon = Icons.Filled.MoreVert,
                                 size = 15,
                                 menuItems = listOf("삭제"),
+                                dataList[index].tripScheduleDocId,
+                                onDeleteSchedule = { scheduleDocId ->
+                                    if (scheduleType == 0) {
+                                        viewModel.removeUserSchedule(scheduleDocId)
+                                    } else {
+                                        viewModel.removeInvitedSchedule(scheduleDocId)
+                                    }
+                                }
+                            )
+                        }
+
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 5.dp),
+                            verticalAlignment = Alignment.CenterVertically // ✅ 수직 중앙 정렬
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.Person, // ✅ 머티리얼 아이콘 사용
+                                contentDescription = "함께 하는 사람 아이콘",
+                                modifier = Modifier
+                                    .padding(end = 2.dp)
+                                    .size(12.5.dp)  // ✅ 크기 조절
+                            )
+
+                            // 일정  지역
+                            Text(
+                                text = dataList[index].scheduleInviteList.size.toString(),
+                                fontFamily = NanumSquareRound,
+                                fontSize = 12.sp,
+                                modifier = Modifier.padding(end = 5.dp)
                             )
                         }
 
@@ -91,7 +120,7 @@ fun ScheduleItemList(
                                     .size(12.5.dp)  // ✅ 크기 조절
                             )
 
-                            // 일정 지역
+                            // 일정  지역
                             Text(
                                 text = dataList[index].scheduleCity,
                                 fontFamily = NanumSquareRoundRegular,
@@ -101,7 +130,9 @@ fun ScheduleItemList(
 
                             // 일정 날짜
                             Text(
-                                text = dataList[index].scheduleStartDate + " ~ " + dataList[index].scheduleEndDate,
+                                text = "${viewModel.formatTimestampToDateString(dataList[index].scheduleStartDate)} " +
+                                        "~" +
+                                        " ${viewModel.formatTimestampToDateString(dataList[index].scheduleEndDate)}",
                                 fontFamily = NanumSquareRoundRegular,
                                 fontSize = 12.sp,
                                 modifier = Modifier
@@ -109,34 +140,11 @@ fun ScheduleItemList(
                                     .padding(top = 0.5.dp),
                             )
                         }
+                        
                     }
 
                 }
             }
         }
     }
-}
-
-
-
-// 미리 보기
-@Preview(showBackground = true)
-@Composable
-fun PreviewItemListScreen() {
-    val dataList : List<TripScheduleModel> = listOf(
-        TripScheduleModel(
-            scheduleTitle = "제주 힐링여행",
-            scheduleStartDate = "2025.03.01",
-            scheduleCity = "서울",
-            scheduleEndDate = "2025.03.05",
-        ),
-        TripScheduleModel(
-            scheduleTitle = "서울 힐링여행",
-            scheduleStartDate = "2025.03.06",
-            scheduleCity = "서울",
-            scheduleEndDate = "2025.03.11",
-        )
-    )
-
-    ScheduleItemList(dataList)
 }

@@ -4,19 +4,20 @@ import com.google.firebase.Timestamp
 import com.lion.wandertrip.model.TripScheduleModel
 import com.lion.wandertrip.model.ScheduleItem
 
-class TripScheduleVO {
-    var tripScheduleDocId: String = ""
-    var userID: String = ""
-    var userNickName: String = ""
-    var scheduleTitle: String = ""
-    var scheduleStartDate: String = ""
-    var scheduleCity: String = ""
-    var scheduleEndDate: String = ""
-    var scheduleInviteList: List<String> = emptyList()
-    var scheduleDateList: List<Timestamp> = emptyList()
-    var scheduleTimeStamp: Timestamp = Timestamp.now()
-    var scheduleState: Int = 1
-    var scheduleItems: List<ScheduleItemVO> = emptyList()
+class TripScheduleVO(
+    var tripScheduleDocId: String = "",
+    var userID: String = "",
+    var userNickName: String = "",
+    var scheduleTitle: String = "",
+    var scheduleStartDate: Timestamp = Timestamp.now(),
+    var scheduleCity: String = "",
+    var scheduleEndDate: Timestamp = Timestamp.now(),
+    var scheduleInviteList: List<String> = emptyList(),
+    var scheduleDateList: List<Timestamp> = emptyList(),
+    var scheduleTimeStamp: Timestamp = Timestamp.now(),
+    var scheduleState: Int = 1,
+    var scheduleItems: List<ScheduleItemVO> = emptyList(),
+) {
 
     fun toTripScheduleModel(): TripScheduleModel {
         val tripScheduleModel = TripScheduleModel()
@@ -36,19 +37,23 @@ class TripScheduleVO {
     }
 }
 
-class ScheduleItemVO {
-    var itemDate: Timestamp = Timestamp.now()
-    var itemIndex: Int = 0
-    var itemTitle: String = ""
-    var itemType: String = ""
-    var itemLongitude: Double = 0.0
-    var itemLatitude: Double = 0.0
-    var itemImagesURL: List<String> = emptyList()
-    var itemReviewText: String = ""
-    var itemReviewImagesURL: List<String> = emptyList()
+class ScheduleItemVO(
+    var itemDocId: String = "",
+    var itemDate: Timestamp = Timestamp.now(),
+    var itemIndex: Int = 0,
+    var itemTitle: String = "",
+    var itemType: String = "",
+    var itemLongitude: Double = 0.0,
+    var itemLatitude: Double = 0.0,
+    var itemImagesURL: List<String> = emptyList(),
+    var itemReviewText: String = "",
+    var itemReviewImagesURL: List<String> = emptyList(),
+    var itemContentId: String = "",
+) {
 
     fun toScheduleItemModel(): ScheduleItem {
         val scheduleItemModel = ScheduleItem()
+        scheduleItemModel.itemDocId = itemDocId
         scheduleItemModel.itemDate = itemDate
         scheduleItemModel.itemIndex = itemIndex
         scheduleItemModel.itemTitle = itemTitle
@@ -58,6 +63,7 @@ class ScheduleItemVO {
         scheduleItemModel.itemImagesURL = itemImagesURL
         scheduleItemModel.itemReviewText = itemReviewText
         scheduleItemModel.itemReviewImagesURL = itemReviewImagesURL
+        scheduleItemModel.itemContentId = itemContentId
         return scheduleItemModel
     }
 }

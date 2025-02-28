@@ -29,6 +29,8 @@ fun ScheduleDropDawnIconButton(
     icon: ImageVector,
     size: Int,
     menuItems: List<String> = listOf("편집", "삭제"),
+    tripScheduleDocId: String,
+    onDeleteSchedule: (String) -> Unit = {},
     onMenuItemClick: (String) -> Unit = {}
 ) {
     // 메뉴 확장 상태
@@ -56,22 +58,10 @@ fun ScheduleDropDawnIconButton(
                     text = { Text(item, fontFamily = NanumSquareRoundRegular) },
                     onClick = {
                         expanded = false
-                        onMenuItemClick(item) // 선택한 메뉴 아이템 클릭 이벤트
+                        onDeleteSchedule(tripScheduleDocId) // 선택한 메뉴 아이템 클릭 이벤트
                     }
                 )
             }
         }
-    }
-}
-
-// 📌 미리보기 추가
-@Preview(showBackground = true)
-@Composable
-fun PreviewScheduleDropDawnIconButton() {
-    ScheduleDropDawnIconButton(
-        icon = Icons.Filled.MoreVert,
-        size = 24
-    ) { selectedItem ->
-        println("선택된 메뉴: $selectedItem") // ✅ 클릭한 메뉴 아이템 확인
     }
 }

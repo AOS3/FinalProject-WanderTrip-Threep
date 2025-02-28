@@ -5,6 +5,7 @@ plugins {
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
+    kotlin("plugin.serialization") version "2.0.0" // (본인의 Kotlin 버전에 맞게 조정)
 }
 
 android {
@@ -13,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "com.lion.wandertrip"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -52,6 +53,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.runtime.livedata)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -76,6 +79,40 @@ dependencies {
     implementation ("androidx.navigation:navigation-runtime-ktx:2.7.7")
     implementation("com.kakao.sdk:v2-user:2.20.1")
 
+    implementation("com.github.skydoves:landscapist-glide:1.4.7")
+    implementation ("com.github.bumptech.glide:compose:1.0.0-alpha.3")
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
+    implementation("com.google.maps.android:maps-compose:2.14.0")
+    implementation("com.google.android.gms:play-services-maps:18.1.0") // 지도
+    implementation("com.google.android.gms:play-services-location:21.0.1") // 지도
+    implementation("com.google.maps.android:maps-compose:2.9.0") // 지도
+    implementation("com.google.accompanist:accompanist-permissions:0.30.0") // 권한 관리 의존성
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2") // lifecycleScope
+
+    // Moshi
+    implementation("com.squareup.moshi:moshi-kotlin:1.13.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+
+
+    // kotlinx.serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0") // ✅ JSON 직렬화 라이브러리 추가
+    implementation("com.squareup.okhttp3:okhttp:4.9.3") // ✅ OkHttp 추가
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0") // ✅ Retrofit 변환기 추가
+
+    // Lottie 애니메이션
+    implementation("com.airbnb.android:lottie-compose:5.2.0")
+
+    // Shimmer 라이브러리
+    implementation("com.valentinilk.shimmer:compose-shimmer:1.0.3")// 버전 예시
+
+    // LazyColumn 순서 변경
+    implementation("org.burnoutcrew.composereorderable:reorderable:0.9.6")
 
 }

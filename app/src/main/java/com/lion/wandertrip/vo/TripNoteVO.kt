@@ -14,9 +14,9 @@ class TripNoteVO {
     var tripNoteTimeStamp: Timestamp = Timestamp.now()
     var tripNoteState: Int = 1
 
-    fun toTripNoteModel(): TripNoteModel {
+    fun toTripNoteModel(documentId : String): TripNoteModel {
         val tripNoteModel = TripNoteModel()
-        tripNoteModel.tripNoteDocumentId = tripNoteDocumentId
+        tripNoteModel.tripNoteDocumentId = documentId
         tripNoteModel.userNickname = userNickname
         tripNoteModel.tripNoteTitle = tripNoteTitle
         tripNoteModel.tripNoteContent = tripNoteContent

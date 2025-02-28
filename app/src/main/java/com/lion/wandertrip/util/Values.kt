@@ -1,5 +1,7 @@
 package com.lion.wandertrip.util
 
+
+
 // 목적지 타입
 enum class ContentTypeId(val contentTypeCode: Int, val contentTypeName: String) {
     TOURIST_ATTRACTION(12, "관광지"),
@@ -7,7 +9,7 @@ enum class ContentTypeId(val contentTypeCode: Int, val contentTypeName: String) 
     RESTAURANT(39, "음식점"),
 }
 
-// 목적지 타입
+// 상태
 enum class State(val stateNumber: Int, val stateStr: String) {
     ACTIVATE(1, "활성화"),
     DEACTIVATE(2, "비활성화"),
@@ -22,14 +24,14 @@ enum class AreaCode(val areaCode: Int, val areaName: String) {
     GWANGJU(5, "광주"),
     BUSAN(6, "부산"),
     ULSAN(7, "울산"),
-    SEJONG(8, "세종특별자치시"),
+    SEJONG(8, "세종시"),
     GYEONGGI(31, "경기도"),
-    GANGWON(32, "강원특별자치도"),
+    GANGWON(32, "강원도"),
     CHUNGBUK(33, "충청북도"),
     CHUNGNAM(34, "충청남도"),
     GYEONGBUK(35, "경상북도"),
     GYEONGNAM(36, "경상남도"),
-    JEONBUK(37, "전북특별자치도"),
+    JEONBUK(37, "전라북도"),
     JEONNAM(38, "전라남도"),
     JEJU(39, "제주도")
 }
@@ -264,15 +266,34 @@ enum class MainScreenName{
     // 로그인 화면
     MAIN_SCREEN_USER_LOGIN,
     // 회원 가입 1 화면, 회원 정보 입력 받기
-    MAIN_SCREEN_USER_Sign_Up_STEP1,
+    MAIN_SCREEN_USER_SIGN_UP_STEP1,
     // 회원 가입 2 화면, 프로필 이미지 입력 받기
-    MAIN_SCREEN_USER_Sign_Up_STEP2,
+    MAIN_SCREEN_USER_SIGN_UP_STEP2,
     // 회원 가입 3 화면, 카톡 가입 후 닉네임 받는 화면
-    MAIN_SCREEN_USER_Sign_Up_STEP3,
+    MAIN_SCREEN_USER_SIGN_UP_STEP3,
     // 검색 화면
     MAIN_SCREEN_SEARCH,
     //검색 결과 화면
     MAIN_SCREEN_SEARCH_RESULT,
+    // 프로필 편집 화면
+    MAIN_SCREEN_USER_INFO,
+    // 내 여행 화면
+    MAIN_SCREEN_MY_TRIP,
+    // 내 저장 화면
+    MAIN_SCREEN_MY_INTERESTING,
+    // 내 리뷰 화면
+    MAIN_SCREEN_MY_REVIEW,
+    // 내 여행기 화면
+    MAIN_SCREEN_MY_TRIP_NOTE,
+    // 상세 화면
+    MAIN_SCREEN_DETAIL,
+    // 구글 지도 화면
+    MAIN_SCREEN_GOOGLE_MAP,
+    // 리뷰 작성 화면
+    MAIN_SCREEN_DETAIL_REVIEW_WRITE,
+    // 리뷰 수정 화면
+    MAIN_SCREEN_DETAIL_REVIEW_MODIFY,
+
 }
 
 enum class BotNavScreenName{
@@ -284,4 +305,115 @@ enum class BotNavScreenName{
     BOT_NAV_SCREEN_TRIP_NOTE,
     // 내정보
     BOT_NAV_SCREEN_MY_INFO,
+}
+
+enum class ScheduleScreenName{
+    // 일정 추가 화면
+    SCHEDULE_ADD_SCREEN,
+    // 일정 지역 선택 화면
+    SCHEDULE_CITY_SELECT_SCREEN,
+    // 일정 상세 화면
+    SCHEDULE_DETAIL_SCREEN,
+    // 일정 항목 선택 화면
+    SCHEDULE_SELECT_ITEM_SCREEN,
+    // 함께 하는 친구 목록 화면
+    SCHEDULE_DETAIL_FRIENDS_SCREEN,
+    // 일정 항목 후기 화면
+    SCHEDULE_ITEM_REVIEW_SCREEN,
+}
+
+enum class TripNoteScreenName{
+    // 여행기 상세 화면
+    TRIP_NOTE_DETAIL,
+    // 여행기 작성 화면
+    TRIP_NOTE_WRITE,
+    // 여행기 일정 불러오기 화면
+    TRIP_NOTE_SCHEDULE,
+    // 타인 일정 리스트 보기 화면
+    TRIP_NOTE_OTHER_SCHEDULE,
+    // 일정 담을 여행 선택하기 화면
+    TRIP_NOTE_SELECT_DOWN,
+}
+
+
+
+enum class RouletteScreenName{
+    ROULETTE_GRAPH, // ✅ 추가된 네비게이션 그래프 이름
+    // 도시 룰렛 화면
+    ROULETTE_CITY_SCREEN,
+    // 룰렛 도시 항목 추가 화면
+    ROULETTE_CITY_SELECT_SCREEN,
+    // 룰렛 일정 항목 화면
+    ROULETTE_ITEM_SCREEN,
+    // 룰렛 일정 항목 추가 화면
+    ROULETTE_ITEM_SELECT_SCREEN,
+}
+
+enum class TripItemCat2(val catCode: String, val catName: String) {
+    // 🌍 자연 및 관광 자원
+    NATURE_TOURISM("A0101", "자연관광지"),
+    TOURISM_RESOURCE("A0102", "관광자원"),
+
+    // 🏛️ 역사 및 문화 관광지
+    HISTORICAL_TOURISM("A0201", "역사관광지"),
+    RESORT_TOURISM("A0202", "휴양관광지"),
+    EXPERIENCE_TOURISM("A0203", "체험관광지"),
+    INDUSTRIAL_TOURISM("A0204", "산업관광지"),
+    ARCHITECTURAL_STRUCTURE("A0205", "건축/조형물"),
+    CULTURAL_FACILITY("A0206", "문화시설"),
+    FESTIVAL("A0207", "축제"),
+    PERFORMANCE_EVENT("A0208", "공연/행사"),
+
+    // 🏅 레포츠 관광
+    SPORTS_OVERVIEW("A0301", "레포츠소개"),
+    LAND_SPORTS("A0302", "육상 레포츠"),
+    WATER_SPORTS("A0303", "수상 레포츠"),
+    AIR_SPORTS("A0304", "항공 레포츠"),
+    COMPOSITE_SPORTS("A0305", "복합 레포츠");
+
+    companion object {
+        // ✅ 코드 값으로 enum 찾기
+        fun fromCodeTripItemCat2(code: String): TripItemCat2? {
+            return values().find { it.catCode == code }
+        }
+    }
+}
+
+enum class RestaurantItemCat3(val catCode: String, val catName: String) {
+    // 🍽️ 음식점 분류
+    KOREAN_FOOD("A05020100", "한식"),
+    WESTERN_FOOD("A05020200", "서양식"),
+    JAPANESE_FOOD("A05020300", "일식"),
+    CHINESE_FOOD("A05020400", "중식"),
+    UNIQUE_RESTAURANT("A05020700", "이색음식점"),
+    CAFE_TEA_HOUSE("A05020900", "카페/전통찻집"),
+    CLUB("A05021000", "클럽");
+
+    companion object {
+        // ✅ 코드 값으로 enum 찾기
+        fun fromCodeRestaurantItemCat3(code: String): RestaurantItemCat3? {
+            return values().find { it.catCode == code }
+        }
+    }
+}
+
+enum class AccommodationItemCat3(val catCode: String, val catName: String) {
+    // 🏨 숙박 시설 유형
+    TOURIST_HOTEL("B02010100", "관광호텔"),
+    CONDOMINIUM("B02010500", "콘도미니엄"),
+    YOUTH_HOSTEL("B02010600", "유스호스텔"),
+    PENSION("B02010700", "펜션"),
+    MOTEL("B02010900", "모텔"),
+    HOMESTAY("B02011000", "민박"),
+    GUEST_HOUSE("B02011100", "게스트하우스"),
+    HOME_STAY("B02011200", "홈스테이"),
+    SERVICED_RESIDENCE("B02011300", "서비스드레지던스"),
+    HANOK("B02011600", "한옥");
+
+    companion object {
+        // ✅ 코드 값으로 enum 찾기
+        fun fromCodeAccommodationItemCat3(code: String): AccommodationItemCat3? {
+            return values().find { it.catCode == code }
+        }
+    }
 }
