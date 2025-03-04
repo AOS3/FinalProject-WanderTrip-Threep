@@ -79,10 +79,6 @@ class UserLoginViewModel @Inject constructor(
     // 로그인 버튼 click
     fun buttonUserLoginOnClick() {
         Log.d("test100", "클릭")
-        tripApplication.navHostController.popBackStack(
-            MainScreenName.MAIN_SCREEN_USER_LOGIN.name,
-            true
-        )
 
         if (textFieldUserLoginIdValue.value.isEmpty()) {
             alertDialogUserIdState.value = true
@@ -142,14 +138,9 @@ class UserLoginViewModel @Inject constructor(
                     // Application 객체에 로그인한 사용자의 정보를 담고 게시판 메인 화면으로 이동한다.
                     tripApplication.loginUserModel = loginUserModel
 
-
-                    tripApplication.navHostController.popBackStack(
-                        MainScreenName.MAIN_SCREEN_USER_LOGIN.name,
-                        true
-                    )
                     tripApplication.navHostController.navigate(BotNavScreenName.BOT_NAV_SCREEN_HOME.name) {
                         // 홈 화면은 남기고 그 이전의 화면들만 백스택에서 제거
-                        popUpTo(BotNavScreenName.BOT_NAV_SCREEN_HOME.name) { inclusive = false }
+                        popUpTo(MainScreenName.MAIN_SCREEN_USER_LOGIN.name) { inclusive = true }
                     }
                 }
             }
@@ -168,10 +159,13 @@ class UserLoginViewModel @Inject constructor(
         //✔ viewModelScope는 ViewModel이 사라지면 자동으로 코루틴을 정리하므로 안정적
 
         viewModelScope.launch {
+            var str : String? = "isError"
             val work1 = async(Dispatchers.IO) {
-                createKakaoToken()
+                str = createKakaoToken()
             }
             val kToken = work1.await()
+            if(str==null) return@launch
+
 
             // 카카오 아이디 받아오기
             val work2 = async(Dispatchers.IO) {
@@ -182,11 +176,13 @@ class UserLoginViewModel @Inject constructor(
             // 등록된 회원인지 유저 탐색
             val model = userService.selectUserDataByKakaoLoginToken(kakaoId ?: 0)
             // 유저중에 kakaoToken 값에 kakaoId 를 갖고 있는 사람이 있다면 홈
-            if (model != null) {
+            if (model != null && kakaoId != null) {
                 tripApplication.loginUserModel = model
+
                 tripApplication.navHostController.navigate(BotNavScreenName.BOT_NAV_SCREEN_HOME.name) {
+
                     // 홈 화면은 남기고 그 이전의 화면들만 백스택에서 제거
-                    popUpTo(BotNavScreenName.BOT_NAV_SCREEN_HOME.name) { inclusive = false }
+                    popUpTo(MainScreenName.MAIN_SCREEN_USER_LOGIN.name) { inclusive = true }
                 }
 
                 // 내부 저장소에 userKakao ID 저장
@@ -206,7 +202,7 @@ class UserLoginViewModel @Inject constructor(
 
             } else {
                 // 등록된 회원이 아니라면
-                if (kToken != "") {
+                if (kToken != null) {
                     tripApplication.navHostController.navigate("${MainScreenName.MAIN_SCREEN_USER_SIGN_UP_STEP3.name}/${kakaoId.toString()}")
                 }
             }

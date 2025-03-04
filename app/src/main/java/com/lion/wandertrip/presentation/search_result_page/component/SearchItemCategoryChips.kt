@@ -10,10 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
-import com.lion.wandertrip.ui.theme.NanumSquareRoundRegular
-import com.lion.wandertrip.util.AccommodationItemCat3
-import com.lion.wandertrip.util.RestaurantItemCat3
-import com.lion.wandertrip.util.TripItemCat2
+
 @Composable
 fun SearchItemCategoryChips(
     selectedCategoryCode: String?,

@@ -2,7 +2,6 @@ package com.lion.wandertrip.presentation.detail_page.used_dummy_data
 
 import com.google.firebase.Timestamp
 import com.lion.wandertrip.model.ReviewModel
-import com.lion.wandertrip.presentation.my_review_page.used_dummy_data.ReviewDummyData
 import java.util.Calendar
 
 class ReviewDummyData {

@@ -59,7 +59,7 @@ class UserSignUpStep2ViewModel @Inject constructor(
             tripApplication.loginUserModel = userModel
 
         }
-        if(fromWhere==""){
+        if(fromWhere=="normal"){
             tripApplication.navHostController.popBackStack(MainScreenName.MAIN_SCREEN_USER_LOGIN.name, false)
 
         }else{

@@ -85,7 +85,7 @@ class DetailViewModel @Inject constructor(
     // 로딩 상태 변수
     val isLoading = mutableStateOf(false)
 
-
+    // 상태 변경 메서드
     fun setState(value: Boolean) {
         //Log.d("test100", "state : $isLoading")
         isLoading.value = value
@@ -94,6 +94,7 @@ class DetailViewModel @Inject constructor(
 
     // 컨텐트 ID 로 api 에서 받아온  모델 가져오기
     fun getCommonTripContentModel(contentID: String) {
+        setState(true)
         viewModelScope.launch {
             val work1 = async(Dispatchers.IO) {
                 tripCommonItemService.getTripCommonItem(contentID, null)
@@ -109,11 +110,12 @@ class DetailViewModel @Inject constructor(
             // 최근 본 목록에 추가하기
             addRecentItem(
                 contentID = tripCommonContentModelValue.value.contentId!!,
-                contentType =tripCommonContentModelValue.value.contentTypeId!!,
-                imageUri =tripCommonContentModelValue.value.firstImage.toString(),
-                title =tripCommonContentModelValue.value.title!!
+                contentType = tripCommonContentModelValue.value.contentTypeId!!,
+                imageUri = tripCommonContentModelValue.value.firstImage.toString(),
+                title = tripCommonContentModelValue.value.title!!
             )
 
+            setState(false)
         }
     }
 
@@ -296,7 +298,6 @@ class DetailViewModel @Inject constructor(
             contentID = contentID,
         )
         Tools.addRecentItemList(tripApplication, recentModel)
-
     }
 
 // --------------------------------------------------------------------------------------------

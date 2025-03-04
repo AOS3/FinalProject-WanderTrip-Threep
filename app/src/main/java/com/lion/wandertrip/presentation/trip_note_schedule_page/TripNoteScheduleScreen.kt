@@ -17,8 +17,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -37,6 +39,7 @@ fun TripNoteScheduleScreen(
     tripNoteScheduleViewModel.gettingTripNoteScheduleData()
 
     Scaffold(
+        containerColor = Color.White,
         topBar = {
             TopAppBar(
                 title = {
@@ -52,6 +55,11 @@ fun TripNoteScheduleScreen(
                         Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.White, // 배경색을 흰색으로 설정
+                    titleContentColor = Color.Black, // 제목 텍스트 색상 설정 (필요 시 변경)
+                    navigationIconContentColor = Color.Black // 네비게이션 아이콘 색상 설정 (필요 시 변경)
+                )
             )
         },
 

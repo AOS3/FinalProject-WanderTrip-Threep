@@ -56,8 +56,11 @@ val pastelColors = listOf(
     Color(0xFFE6E6FA), // Pastel Lavender
     Color(0xFFFADADD), // Pastel Rose
     Color(0xFFF7C6C7)  // Pastel Salmon
+
 )
 
+
+val Gray0 = Color(0xFFF8F8F8) // 연한 그레이 (Gray 1)
 val Gray1 = Color(0xFFBDC3C7) // 연한 그레이 (Gray 1)
 val Gray2 = Color(0xFF95A5A6) // 중간 그레이 (Gray 2)
 val Gray3 = Color(0xFF7F8C8D) // 진한 그레이 (Gray 3)

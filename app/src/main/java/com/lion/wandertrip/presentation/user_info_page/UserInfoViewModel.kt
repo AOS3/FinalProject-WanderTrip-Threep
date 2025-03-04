@@ -14,6 +14,7 @@ import com.lion.wandertrip.service.ContentsReviewService
 import com.lion.wandertrip.service.TripNoteService
 import com.lion.wandertrip.service.TripScheduleService
 import com.lion.wandertrip.service.UserService
+import com.lion.wandertrip.util.BotNavScreenName
 import com.lion.wandertrip.util.MainScreenName
 import com.lion.wandertrip.util.Tools
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -184,7 +185,7 @@ class UserInfoViewModel @Inject constructor(
             Log.d("backStack"," 일반 로그아웃 화면 전환")
             Log.d("backStack"," backStack :${backStack.value}")
 
-            popUpTo(MainScreenName.MAIN_SCREEN_USER_INFO.name) { inclusive = true }
+            popUpTo(BotNavScreenName.BOT_NAV_SCREEN_HOME.name) { inclusive = true }
             launchSingleTop = true
         }
     }
@@ -206,7 +207,7 @@ class UserInfoViewModel @Inject constructor(
         tripApplication.navHostController.navigate(MainScreenName.MAIN_SCREEN_USER_LOGIN.name){
             Log.d("backStack"," 카카오 로그아웃 화면 전환")
             // 이미 로그인 화면이 백스택에 있으면 중복 생성 방지
-            popUpTo(MainScreenName.MAIN_SCREEN_USER_INFO.name) { inclusive = true }
+            popUpTo(BotNavScreenName.BOT_NAV_SCREEN_HOME.name) { inclusive = true }
             launchSingleTop = true
         }
 

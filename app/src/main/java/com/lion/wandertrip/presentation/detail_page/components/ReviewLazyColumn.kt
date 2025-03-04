@@ -29,8 +29,6 @@ fun ReviewLazyColumn(detailViewModel: DetailViewModel) {
     val sh = detailViewModel.tripApplication.screenHeight
     val contentModel = detailViewModel.tripCommonContentModelValue.value
     LaunchedEffect(Unit) {
-        Log.d("test100","unit")
-        detailViewModel.setState(true)
         detailViewModel.getReviewList()
         detailViewModel.getFilteredReviewList()
         detailViewModel.getUri(detailViewModel.filteredReviewList)

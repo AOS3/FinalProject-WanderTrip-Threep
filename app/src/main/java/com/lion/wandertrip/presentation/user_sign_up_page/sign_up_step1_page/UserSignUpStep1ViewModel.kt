@@ -135,7 +135,9 @@ class UserSignUpStep1ViewModel @Inject constructor(
                 tripApplication.loginUserModel = userModel
 
                 // 닉네임 설정 화면으로 이동, userDocId 값을 경로에 포함시켜 전달
-                tripApplication.navHostController.navigate("${MainScreenName.MAIN_SCREEN_USER_SIGN_UP_STEP2.name}/${"normal"}/$userDocId")
+                tripApplication.navHostController.navigate("${MainScreenName.MAIN_SCREEN_USER_SIGN_UP_STEP2.name}/${"normal"}/$userDocId"){
+                    popUpTo(MainScreenName.MAIN_SCREEN_USER_LOGIN.name){inclusive = false}
+                }
             }
         }
     }

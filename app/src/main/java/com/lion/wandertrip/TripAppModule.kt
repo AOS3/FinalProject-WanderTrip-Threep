@@ -27,7 +27,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent ::class)
 object TripAppModule {
-    val BASE_URL = "http://apis.data.go.kr/B551011/KorService1/"
+
 
 
     @Provides
@@ -57,6 +57,8 @@ object TripAppModule {
         return TripScheduleService(tripScheduleRepository)
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    val BASE_URL = "http://apis.data.go.kr/B551011/KorService1/"
 
     // TripCommonItem
     @Provides

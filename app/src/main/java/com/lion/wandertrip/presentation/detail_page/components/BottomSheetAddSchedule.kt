@@ -21,6 +21,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -48,11 +49,15 @@ fun BottomSheetAddSchedule(
         detailViewModel.getTripSchedule()
     }
 
+
     val schedules = detailViewModel.tripScheduleList
+    // 시트 사이즈 기억해서 초기화 되지않게 하는 것
+    val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     ModalBottomSheet(
         onDismissRequest = {
             detailViewModel.isAddScheduleSheetOpen.value = false
-        }
+        },
+        sheetState = bottomSheetState // 바텀시트 상태 적용
     ) {
         LazyColumn(
             modifier = Modifier

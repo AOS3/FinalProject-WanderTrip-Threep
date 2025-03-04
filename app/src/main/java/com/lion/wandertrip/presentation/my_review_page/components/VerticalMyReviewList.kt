@@ -37,11 +37,14 @@ import com.lion.wandertrip.R
 import com.lion.wandertrip.component.CustomRatingBar
 import com.lion.wandertrip.model.ReviewModel
 import com.lion.wandertrip.presentation.my_review_page.MyReviewViewModel
+import com.lion.wandertrip.ui.theme.Gray0
 import com.lion.wandertrip.ui.theme.Gray1
 import com.lion.wandertrip.ui.theme.Gray2
 import com.lion.wandertrip.ui.theme.Gray4
+import com.lion.wandertrip.ui.theme.LightGray1
 import com.lion.wandertrip.ui.theme.LightGray2
 import com.lion.wandertrip.ui.theme.LightGray3
+import com.lion.wandertrip.ui.theme.LightGray4
 import com.lion.wandertrip.util.CustomFont
 import com.skydoves.landscapist.CircularReveal
 import com.skydoves.landscapist.glide.GlideImage
@@ -71,10 +74,12 @@ fun ReviewItem(review: ReviewModel, pos: Int, myReviewViewModel: MyReviewViewMod
     }
     val sH = myReviewViewModel.tripApplication.screenHeight
     Card(
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp),
-        colors = CardDefaults.cardColors(containerColor = LightGray2)
+        colors = CardDefaults.cardColors(containerColor = LightGray3)
     ) {
         Column(
             modifier = Modifier.padding(10.dp)
@@ -84,9 +89,9 @@ fun ReviewItem(review: ReviewModel, pos: Int, myReviewViewModel: MyReviewViewMod
                 modifier = Modifier
                     .padding(bottom = 10.dp, top = 15.dp)
                     .padding(horizontal = 10.dp),
-                text = "제목 : ${review.reviewTitle}",
+                text = review.reviewTitle,
                 fontFamily = CustomFont.customFontBold,
-                fontSize = 30.sp // 글씨 크기 설정
+                fontSize = 24.sp // 글씨 크기 설정
             )
             Row(
                 modifier = Modifier.padding(horizontal = 10.dp)

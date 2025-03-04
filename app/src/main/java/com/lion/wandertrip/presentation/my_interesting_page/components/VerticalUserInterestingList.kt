@@ -36,6 +36,7 @@ import com.lion.wandertrip.R
 import com.lion.wandertrip.component.CustomRatingBar
 import com.lion.wandertrip.model.UserInterestingModel
 import com.lion.wandertrip.presentation.my_interesting_page.MyInterestingViewModel
+import com.lion.wandertrip.ui.theme.Gray0
 import com.lion.wandertrip.ui.theme.NanumSquareRoundRegular
 import com.lion.wandertrip.util.CustomFont
 import com.skydoves.landscapist.CircularReveal
@@ -86,7 +87,7 @@ fun UserInterestingItem(
                 viewModel.onClickListItemToDetailScreen(interestingItem.contentID)
             }
             .fillMaxWidth()
-            .background(Color.White, RoundedCornerShape(8.dp))
+            .background(Gray0, RoundedCornerShape(8.dp))
             .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

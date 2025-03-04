@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.BottomAppBar
@@ -109,6 +110,23 @@ fun RouletteCitySelectScreen(
                     viewModel.updateFilteredCities("") // ✅ X 버튼 클릭 시 전체 도시 목록 복원
                 }
             )
+
+            // ★ 전체 선택 버튼 추가 (검색 바와 Chip 사이에 배치)
+            Button(
+                onClick = {
+                    // filteredCities 기준으로 전체 선택 (검색 결과에 해당하는 도시 모두 선택)
+                    viewModel.selectedCities.clear()
+                    viewModel.selectedCities.addAll(viewModel.filteredCities)
+                    Log.d("RouletteCitySelectScreen", "전체 선택 버튼 클릭: 선택된 도시 수 = ${viewModel.selectedCities.size}")
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                // 모서리 둥글게 설정
+                shape = RoundedCornerShape(10.dp),
+            ) {
+                Text("도시 전체 선택", fontFamily = NanumSquareRoundRegular)
+            }
 
             // ✅ 선택된 도시 목록을 Chip으로 표시
             if (viewModel.selectedCities.isNotEmpty()) {

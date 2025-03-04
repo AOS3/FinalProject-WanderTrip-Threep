@@ -82,9 +82,9 @@ fun TripNoteItem(tripNote: TripNoteModel, pos: Int, myTripNoteViewModel: MyTripN
                 modifier = Modifier
                     .padding(bottom = 50.dp, top = 15.dp)
                     .padding(horizontal = 10.dp),
-                text = "제목 : ${tripNote.tripNoteTitle}",
+                text = tripNote.tripNoteTitle,
                 fontFamily = CustomFont.customFontBold,
-                fontSize = 30.sp // 글씨 크기 설정
+                fontSize = 24.sp // 글씨 크기 설정
             )
 
             Column(modifier = Modifier.padding(horizontal = 10.dp)) {

@@ -52,6 +52,7 @@ import com.google.firebase.storage.storage
 import com.lion.a02_boardcloneproject.component.CustomTopAppBar
 import com.lion.wandertrip.model.TripNoteModel
 import com.lion.wandertrip.presentation.bottom.schedule_page.component.ScheduleIconButton
+import com.lion.wandertrip.ui.theme.Gray0
 import com.lion.wandertrip.ui.theme.NanumSquareRound
 import com.lion.wandertrip.ui.theme.NanumSquareRoundRegular
 import kotlinx.coroutines.launch
@@ -148,7 +149,8 @@ fun TripNoteScreen(
                             .fillMaxWidth()
                             .padding(vertical = 10.dp), // 항목 사이 간격 추가
                         shape = RoundedCornerShape(14.dp), // 모서리 둥글게
-                        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp) // 카드의 그림자 설정
+                        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp), // 카드의 그림자 설정
+                        colors = CardDefaults.cardColors(Gray0)
                     ) {
                         TripNoteItem(
                             tripNote = tripNote,

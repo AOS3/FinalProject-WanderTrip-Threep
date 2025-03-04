@@ -35,7 +35,7 @@ fun MyInterestingScreen(myInterestingViewModel: MyInterestingViewModel = hiltVie
     // Scroll 상태를 기억하기 위한 rememberScrollState 사용
     val scrollState = rememberScrollState()
 
-    // ✅ 최초 실행 시 데이터 불러오기 (한 번만 실행)
+    //  최초 실행 시 데이터 불러오기 (한 번만 실행)
     // 매개변수 Unit 전달 시 최초 1회만 생성
     LaunchedEffect(Unit) {
         Log.d("asd","LaunchedEffect")
@@ -46,7 +46,7 @@ fun MyInterestingScreen(myInterestingViewModel: MyInterestingViewModel = hiltVie
         }
     }
 
-    // ✅ filteredCityName이 변경될 때만 실행 (무한 루프 방지)
+    //  filteredCityName이 변경될 때만 실행 (무한 루프 방지)
     // 매개변수가 Any 타입이면 변수가 변경될때만 실행, composable이 재구성 되더라도 실행되지 않음
     LaunchedEffect(myInterestingViewModel.filteredCityName.value) {
         myInterestingViewModel.getInterestingFilter(myInterestingViewModel.filteredCityName.value)

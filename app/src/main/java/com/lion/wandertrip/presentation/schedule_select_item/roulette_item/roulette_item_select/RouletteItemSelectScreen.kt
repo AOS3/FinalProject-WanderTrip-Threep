@@ -67,6 +67,18 @@ fun RouletteItemSelectScreen(
                 onClearQuery = { searchQuery = "" }
             )
 
+            // ★ 랜덤으로 30개 선택 버튼 추가
+            Button(
+                onClick = {
+                    // sharedTripItemList에서 임의로 섞은 후 30개 선택
+                    selectedItems = SharedTripItemList.sharedTripItemList.shuffled().take(30)
+                    Log.d("RouletteItemSelectScreen", "Randomly selected ${selectedItems.size} items")
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("랜덤 30개 선택")
+            }
+
             // 🎯 카테고리 칩 버튼 추가
             ScheduleItemCategoryChips(
                 itemCode = SharedTripItemList.sharedTripItemList[0].contentTypeId.toInt(),
@@ -108,6 +120,10 @@ fun RouletteItemSelectScreen(
                 onClick = {
                     // ✅ 선택된 항목을 ViewModel의 `rouletteItemList`에 저장
                     viewModel.updateRouletteItemList(selectedItems)
+                    selectedItems.forEach {
+                        Log.d("RouletteItemSelectScreen", "Selected Item: ${it.title}")
+                    }
+                    Log.d("RouletteItemSelectScreen", "Selected ${selectedItems.size} items")
                     navController.popBackStack()
                 },
                 modifier = Modifier.fillMaxWidth(),

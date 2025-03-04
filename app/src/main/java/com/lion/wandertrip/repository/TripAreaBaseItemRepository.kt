@@ -15,14 +15,19 @@ class TripAreaBaseItemRepository(private val api: TripAreaBaseItemInterface) {
                 mobileOS = "ETC",
                 mobileApp = "com.lion.wandertrip",
                 type = "json",
-                numOfRows = 10000,
+                numOfRows = 50000,
                 pageNo = 1
             )
 
             if (response.isSuccessful) {
                 response.body()?.let { apiResponse ->
-                    val items =
-                        apiResponse.response.body.items.item.shuffled().take(3) // 무작위로 3개 선택
+                    val validContentTypes = setOf(12, 32, 39) // 🔥 가져올 ContentTypeId 목록
+
+                    val items = apiResponse.response.body.items.item
+                        .filter { it.contentTypeId?.toIntOrNull() in validContentTypes } // 🔥 필터링
+                        .shuffled()
+                        .take(3) // 🔥 무작위로 3개 선택
+
                     items.map {
                         TripItemModel(
                             contentId = it.contentId ?: "",
@@ -33,9 +38,8 @@ class TripAreaBaseItemRepository(private val api: TripAreaBaseItemInterface) {
                             areaCode = it.areaCode ?: "",
                             addr1 = it.addr1 ?: "",
                             addr2 = it.addr2 ?: "",
-                            mapLat = it.mapLat?.toDoubleOrNull() ?: 0.0, // 🔥 문자열을 Double로 변환
-                            mapLong = it.mapLng?.toDoubleOrNull()
-                                ?: 0.0, // 🔥 mapLng → mapLong으로 매칭
+                            mapLat = it.mapLat?.toDoubleOrNull() ?: 0.0,
+                            mapLong = it.mapLng?.toDoubleOrNull() ?: 0.0,
                             cat2 = it.cat2 ?: "",
                             cat3 = it.cat3 ?: ""
                         )
@@ -50,6 +54,7 @@ class TripAreaBaseItemRepository(private val api: TripAreaBaseItemInterface) {
             null
         }
     }
+
 
     suspend fun gettingAllItem(): List<TripItemModel>? {
         return try {

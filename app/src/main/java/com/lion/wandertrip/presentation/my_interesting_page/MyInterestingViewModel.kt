@@ -10,7 +10,6 @@ import androidx.lifecycle.viewModelScope
 import com.lion.wandertrip.TripApplication
 import com.lion.wandertrip.model.ContentsModel
 import com.lion.wandertrip.model.UserInterestingModel
-import com.lion.wandertrip.presentation.my_interesting_page.used_dummy_data.InterestingDummyData
 import com.lion.wandertrip.service.ContentsService
 import com.lion.wandertrip.service.TripCommonItemService
 import com.lion.wandertrip.service.UserService
@@ -92,6 +91,7 @@ class MyInterestingViewModel @Inject constructor(
             val work1 = async(Dispatchers.IO) {
                 when (likeMap[pos]) {
                     true -> {
+                        // 좋아요 하기 -> 이건 리스트에서 취소할때 바로 제거하는걸로 변경해 사용하지 않는다.
                         userService.addLikeItem(
                             tripApplication.loginUserModel.userDocId,
                             contentId
@@ -100,11 +100,12 @@ class MyInterestingViewModel @Inject constructor(
                     }
 
                     false -> {
+                        // 좋아요 취소할때 DB 에 반영
                         userService.removeLikeItem(
                             tripApplication.loginUserModel.userDocId,
                             contentId
                         )
-
+                        // DB에 컨텐츠 좋아요수 감소 반영
                         userService.removeLikeCnt(contentId)
                         // 전체 리스트에서도 삭제
                         interestingListAll.remove(interestingListFilterByCity[pos])
@@ -243,10 +244,8 @@ class MyInterestingViewModel @Inject constructor(
     fun getLocalList() {
         Log.d("test100", "interListAll $interestingListAll")
         localList.clear()
-        localList.add("전체")
         interestingListAll.forEach {
             Log.d("test100", "interListItem $it")
-
             val cityName = Tools.getAreaDetails(it.areacode, it.sigungucode)
             if (!localList.contains(cityName)) {
                 localList.add(cityName)
@@ -254,6 +253,9 @@ class MyInterestingViewModel @Inject constructor(
         }
         Log.d("test100", "LocalList $localList")
 
+        localList.sort() // 리스트를 이름순 정렬
+
+        localList.add(0,"전체")
     }
 
     // 관광지 클릭 리스너
